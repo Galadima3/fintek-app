@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "507039180720",
+    "project_id": "mylez-fintek-app",
+    "storage_bucket": "mylez-fintek-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507039180720:android:4b1b1c58c4596608909875",
+        "android_client_info": {
+          "package_name": "com.example.fintek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507039180720-1k7qhvsaq00iq9ind9k7cqr5jnnqm2eq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAYPH2aOS02uyQuW0kvVQhSYWlNhyr7pk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507039180720-1k7qhvsaq00iq9ind9k7cqr5jnnqm2eq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
