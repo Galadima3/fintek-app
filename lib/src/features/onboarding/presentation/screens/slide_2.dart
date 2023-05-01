@@ -1,3 +1,4 @@
+import 'package:fintek/src/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class Slide2 extends StatelessWidget {
@@ -5,8 +6,9 @@ class Slide2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
+    return Image.asset(
+      onboardingImage,
+      fit: BoxFit.cover,
     );
   }
 }

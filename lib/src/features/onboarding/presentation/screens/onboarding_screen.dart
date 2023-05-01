@@ -1,6 +1,8 @@
 import 'package:fintek/main.dart';
-import 'package:fintek/src/features/onboarding/presentation/screens/slide_1.dart';
-import 'package:fintek/src/features/onboarding/presentation/screens/slide_2.dart';
+import 'package:fintek/src/features/account/presentation/screens/home_screen.dart';
+import 'package:fintek/src/features/onboarding/presentation/screens/onboarding_slide.dart';
+import 'package:fintek/src/features/onboarding/presentation/widgets/onboarding_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -30,8 +32,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 });
               },
               children: const [
-                Slide1(),
-                Slide2(),
+                OnboardingSlide(screenText: 'Get involved in your Saving and Grow'),
+                OnboardingSlide(screenText: 'Financial Stability Guaranteed'),
               ],
             ),
             Container(
@@ -41,15 +43,30 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SmoothPageIndicator(controller: _controller, count: 2),
+                    SmoothPageIndicator(
+                      controller: _controller,
+                      count: 2,
+                     effect: const WormEffect(
+                        spacing: 14.5,
+                        dotColor: Colors.white38,
+                        activeDotColor: Colors.white),
+                    onDotClicked: (index) => _controller.animateToPage(index,
+                        duration: const Duration(milliseconds: 350),
+                        curve: Curves.easeIn),
+                    ),
                     onLastPage
                         ? GestureDetector(
-                            onTap: () {
-                             Navigator.push(context, MaterialPageRoute(builder: (context) {
-                               return const MyHomePage(title: 'Ozai');
-                             },));
+                            onTap: () async {
+                              final navigator = Navigator.of(context);
+                              final prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setBool('showHome', true);
+                              navigator
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return const HomeScreen(title: 'Ozai');
+                              }));
                             },
-                            child: const FancyButton(text: 'Done'),
+                            child: const OnboardingButton(text: 'Done'),
                           )
                         : GestureDetector(
                             onTap: () {
@@ -57,7 +74,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                                   duration: const Duration(milliseconds: 500),
                                   curve: Curves.easeIn);
                             },
-                            child: const FancyButton(text: 'Next'),
+                            child: const OnboardingButton(text: 'Next'),
                           ),
                   ],
                 ),
@@ -70,28 +87,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 }
 
-class FancyButton extends StatelessWidget {
-  final String text;
-  const FancyButton({
-    super.key,
-    required this.text,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 35,
-      width: 75,
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-    );
-  }
-}
+
+
+// effect: WormEffect(
+//                         spacing: 16,
+//                         dotColor: Colors.white38,
+//                         activeDotColor: Colors.white),
+//                     onDotClicked: (index) => _controller.animateToPage(index,
+//                         duration: Duration(milliseconds: 500),
+//                         curve: Curves.easeIn),
