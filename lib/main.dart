@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:fintek/src/features/account/presentation/screens/home_screen.dart';
+
 import 'package:fintek/src/features/auth/presentation/auth_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:fintek/firebase_options.dart';
@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
+        fontFamily: 'Montserrat'
       ),
       home:
           showHome ? const AuthChecker() : const OnboardingScreen(),

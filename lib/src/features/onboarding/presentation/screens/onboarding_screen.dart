@@ -1,4 +1,4 @@
-import 'package:fintek/main.dart';
+
 import 'package:fintek/src/features/account/presentation/screens/home_screen.dart';
 import 'package:fintek/src/features/onboarding/presentation/screens/onboarding_slide.dart';
 import 'package:fintek/src/features/onboarding/presentation/widgets/onboarding_button.dart';

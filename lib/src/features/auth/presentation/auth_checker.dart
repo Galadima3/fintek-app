@@ -14,7 +14,7 @@ class AuthChecker extends ConsumerWidget {
     return authState.when(
       data: (user) {
         if (user != null){
-          return const HomeScreen(title: 'Ozai',);
+          return const MyApp();
         }
         return const RegisterScreen();
       },
