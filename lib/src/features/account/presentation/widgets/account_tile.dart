@@ -24,7 +24,7 @@ class AccountTile extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              height: 50,
+              height: 40,
               width: 55,
               decoration: BoxDecoration(
                   color: const Color(0xFF0E0E52),

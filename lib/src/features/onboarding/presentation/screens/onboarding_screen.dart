@@ -63,7 +63,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                               prefs.setBool('showHome', true);
                               navigator
                                   .push(MaterialPageRoute(builder: (context) {
-                                return const HomeScreen(title: 'Ozai');
+                                return const HomeScreen();
                               }));
                             },
                             child: const OnboardingButton(text: 'Done'),

@@ -24,7 +24,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           .then((value) => Navigator.pushReplacement(context, MaterialPageRoute(
                 builder: (context) {
                   return const HomeScreen(
-                    title: 'Iroh',
+                   
                   );
                 },
               )));

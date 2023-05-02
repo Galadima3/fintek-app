@@ -2,6 +2,7 @@ import 'package:fintek/src/core/constants.dart';
 import 'package:fintek/src/features/account/presentation/screens/settings_screen.dart';
 import 'package:fintek/src/features/account/presentation/screens/transaction_history.dart';
 import 'package:fintek/src/features/account/presentation/widgets/account_tile.dart';
+import 'package:fintek/src/features/account/presentation/widgets/feature_tile.dart';
 import 'package:fintek/src/features/auth/data/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   static const List<Widget> _screens = [
-    HomeScreen(title: 'Ozai'),
+    HomeScreen(),
     SettingsScreen(),
     TransactionScreen()
   ];
@@ -61,8 +62,8 @@ class _MyAppState extends State<MyApp> {
 }
 
 class HomeScreen extends ConsumerStatefulWidget {
-  final String title;
-  const HomeScreen({super.key, required this.title});
+  
+  const HomeScreen({super.key,});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
@@ -77,6 +78,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
       appBar: AppBar(
         backgroundColor: const Color(0xFF0E0E52),
+        title: Text(
+          // "Hello ${userInfoProvider!.displayName!.split(" ").sublist(0, 1).elementAt(0)}",
+          "Hello ${" ".filteredName(userInfoProvider!.displayName)}",
+          style: const TextStyle(
+              fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         leading: const Padding(
           padding: EdgeInsets.all(8.0),
           child: CircleAvatar(
@@ -84,71 +91,85 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 'https://images.unsplash.com/photo-1480429370139-e0132c086e2a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bWFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'),
           ),
         ),
-        actions: const [
-          Padding(
+        actions: [
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: Icon(CupertinoIcons.bell_fill, color: Colors.white),
-          )
+          ),
+          IconButton(
+              onPressed: () => ref.read(authRepositoryProvider).signOut(),
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.white,
+              ))
         ],
       ),
-      body: Column(
-        children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Container(
-                height: 150,
-                width: 330,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12)),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(13.5),
+                child: Container(
+                  height: 135,
+                  width: 330,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12)),
+                ),
               ),
             ),
-          ),
-          const AccountTile(
-            title: 'Send Funds',
-            subtitle: 'Send Funds to any account',
-            imagePath: 'asset/images/send.svg',
-          ),
-          const SizedBox(height: 15),
-          const AccountTile(
-            title: 'Withdraw Funds',
-            subtitle: 'Withdraw to any account',
-            imagePath: 'asset/images/withdraw.svg',
-          ),
-          const SizedBox(height: 15),
-          const AccountTile(
-            title: 'Save Money',
-            subtitle: 'Improve your Saving game',
-            imagePath: 'asset/images/save.svg',
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: 100,
-              child: ListView.builder(
-                itemCount: 3,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: SizedBox(
-                        height: 100,
-                        width: 135,
-                        
-                        child: Center(child: Image.asset(onboardingImage)),
-                      ),
+            const AccountTile(
+              title: 'Send Funds',
+              subtitle: 'Send Funds to any account',
+              imagePath: 'asset/images/send.svg',
+            ),
+            const SizedBox(height: 10),
+            const AccountTile(
+              title: 'Withdraw Funds',
+              subtitle: 'Withdraw to any account',
+              imagePath: 'asset/images/withdraw.svg',
+            ),
+            const SizedBox(height: 10),
+            const AccountTile(
+              title: 'Save Money',
+              subtitle: 'Improve your Saving game',
+              imagePath: 'asset/images/save.svg',
+            ),
+            const SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: SizedBox(
+                height: 130,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    FeatureTile(
+                      title: 'Save and Spend Later',
+                      imagePath: pocketMoney,
                     ),
-                  );
-                },
+                    FeatureTile(
+                      title: 'Save and Receive Money',
+                      imagePath: countMoney,
+                    ),
+                    FeatureTile(
+                      title: 'Create Virtual Cards',
+                      imagePath: virtualCard,
+                    )
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+extension FilterString on String {
+  String filteredName(String? name) {
+    return name!.split(" ").sublist(0, 1).elementAt(0);
   }
 }
