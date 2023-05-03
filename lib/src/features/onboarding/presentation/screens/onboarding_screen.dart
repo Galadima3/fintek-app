@@ -1,5 +1,7 @@
 
 import 'package:fintek/src/features/account/presentation/screens/home_screen.dart';
+import 'package:fintek/src/features/auth/presentation/auth_checker.dart';
+import 'package:fintek/src/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:fintek/src/features/onboarding/presentation/screens/onboarding_slide.dart';
 import 'package:fintek/src/features/onboarding/presentation/widgets/onboarding_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -63,7 +65,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                               prefs.setBool('showHome', true);
                               navigator
                                   .push(MaterialPageRoute(builder: (context) {
-                                return const HomeScreen();
+                                return const LoginScreen();
                               }));
                             },
                             child: const OnboardingButton(text: 'Done'),

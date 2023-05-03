@@ -1,7 +1,9 @@
 import 'package:fintek/src/features/account/presentation/screens/home_screen.dart';
 import 'package:fintek/src/features/auth/data/auth_repository.dart';
+import 'package:fintek/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:fintek/src/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:fintek/src/features/auth/presentation/widgets/shared_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,18 +29,21 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     super.dispose();
   }
 
-  void onSubmit(WidgetRef ref, String name, String email, String password) {
+  void onSubmit(
+      String name, String email, String password) async {
     if (_key.currentState!.validate()) {
-      ref.read(authRepositoryProvider).signUp(name, email, password).then(
-            (value) => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const HomeScreen();
-                },
-              ),
-            ),
-          );
+      final user = await FireAuth.registerUsingEmailPassword(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      if (!mounted) return;
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(user: user!),
+        ),
+        ModalRoute.withName('/'),
+      );
     }
   }
 
@@ -135,7 +140,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     const SizedBox(height: 15),
                     GestureDetector(
                       onTap: () => onSubmit(
-                        ref,
+                        
                         nameController.text,
                         emailController.text,
                         passwordController.text,
