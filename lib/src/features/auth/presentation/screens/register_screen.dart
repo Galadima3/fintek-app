@@ -1,9 +1,7 @@
 import 'package:fintek/src/features/account/presentation/screens/home_screen.dart';
-import 'package:fintek/src/features/auth/data/auth_repository.dart';
 import 'package:fintek/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:fintek/src/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:fintek/src/features/auth/presentation/widgets/shared_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

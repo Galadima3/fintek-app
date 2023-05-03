@@ -73,8 +73,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    log('Rebuilds');
-    //disposing all text controllers
+ 
 
     return SafeArea(
       child: Scaffold(

@@ -30,6 +30,7 @@ class AccountTile extends StatelessWidget {
                   color: const Color(0xFF0E0E52),
                   borderRadius: BorderRadius.circular(12)),
               child:  Center(
+                // ignore: deprecated_member_use
                 child: SvgPicture.asset(imagePath, color: Colors.white,)
               ),
             ),

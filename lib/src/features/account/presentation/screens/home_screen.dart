@@ -1,67 +1,13 @@
 import 'package:fintek/src/core/constants.dart';
-import 'package:fintek/src/features/account/presentation/screens/settings_screen.dart';
-import 'package:fintek/src/features/account/presentation/screens/transaction_history.dart';
+
 import 'package:fintek/src/features/account/presentation/widgets/account_tile.dart';
 import 'package:fintek/src/features/account/presentation/widgets/feature_tile.dart';
-import 'package:fintek/src/features/auth/data/auth_repository.dart';
+
 import 'package:fintek/src/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/cupertino.dart';
-
-// class MyAppX extends StatefulWidget {
-//   const MyAppX({super.key});
-
-//   @override
-//   State<MyAppX> createState() => _MyAppXState();
-// }
-
-// class _MyAppXState extends State<MyAppX> {
-//   int _selectedIndex = 0;
-//   void _onItemTapped(int index) {
-//     setState(() {
-//       _selectedIndex = index;
-//     });
-//   }
-
-//   static const List<Widget> _screens = [
-//     HomeScreen(user: user),
-//     SettingsScreen(),
-//     TransactionScreen()
-//   ];
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: _screens.elementAt(_selectedIndex),
-//       ),
-//       bottomNavigationBar: BottomNavigationBar(
-//           selectedFontSize: 16,
-//           selectedIconTheme:
-//               const IconThemeData(color: Color(0xFF0E0E52), size: 25),
-//           selectedItemColor: const Color(0xFF0E0E52),
-//           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
-//           showUnselectedLabels: false,
-//           currentIndex: _selectedIndex,
-//           onTap: _onItemTapped,
-//           items: const [
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.home),
-//               label: 'Home',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.history),
-//               label: 'History',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.settings),
-//               label: 'settings',
-//             ),
-//           ]),
-//     );
-//   }
-// }
 
 class HomeScreen extends ConsumerStatefulWidget {
   final User user;
@@ -72,6 +18,94 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  returnBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25.0),
+        ),
+      ),
+      builder: (context) {
+        return SizedBox(
+          
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Select Account',
+                      style: kTextStyle1,
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: const Icon(Icons.cancel))
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Center(
+                  child: Row(
+                    children: [
+                      Image.asset(
+                          width: 100, height: 100, 'asset/images/uba.jpeg'),
+                      const SizedBox(
+                        width: 50,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('3005678901', style: kTextStyle2,),
+                          Text('Glory Bassey'),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            
+            Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Center(
+                  child: Row(
+                    children: [
+                      Image.asset(
+                          width: 100, height: 100, 'asset/images/firstBank.jpeg'),
+                      const SizedBox(
+                        width: 50,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('3005678901', style: kTextStyle2,),
+                          Text('Glory Bassey'),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              
+
+              
+            
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   User? currentUser;
   @override
   void initState() {
@@ -129,18 +163,68 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(13.5),
                 child: Container(
+                  padding: const EdgeInsets.all(12),
                   height: 135,
                   width: 330,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12)),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //row
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('Wallet Balance', style: kTextStyle),
+                          Icon(
+                            Icons.visibility_off,
+                            size: 27.5,
+                          )
+                        ],
+                      ),
+                      const Text('₦30000', style: kTextStyle),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 45,
+                            width: 130,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(width: 1.3),
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Text('Fund Wallet'),
+                                  Icon(Icons.add),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const Icon(
+                            Icons.group_add,
+                            color: Color(0xFF0E0E52),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-            const AccountTile(
-              title: 'Send Funds',
-              subtitle: 'Send Funds to any account',
-              imagePath: 'asset/images/send.svg',
+            GestureDetector(
+              onTap: () => returnBottomSheet(context),
+              child: const AccountTile(
+                title: 'Send Funds',
+                subtitle: 'Send Funds to any account',
+                imagePath: 'asset/images/send.svg',
+              ),
             ),
             const SizedBox(height: 10),
             const AccountTile(

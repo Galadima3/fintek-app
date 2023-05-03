@@ -1,6 +1,5 @@
 
-import 'package:fintek/src/features/account/presentation/screens/home_screen.dart';
-import 'package:fintek/src/features/auth/presentation/auth_checker.dart';
+
 import 'package:fintek/src/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:fintek/src/features/onboarding/presentation/screens/onboarding_slide.dart';
 import 'package:fintek/src/features/onboarding/presentation/widgets/onboarding_button.dart';

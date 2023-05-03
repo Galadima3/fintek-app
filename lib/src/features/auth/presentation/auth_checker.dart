@@ -1,4 +1,4 @@
-import 'package:fintek/src/features/account/presentation/screens/home_screen.dart';
+
 import 'package:fintek/src/features/auth/data/auth_repository.dart';
 import 'package:fintek/src/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:fintek/src/features/auth/presentation/screens/register_screen.dart';

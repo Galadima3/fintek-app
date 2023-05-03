@@ -1,7 +1,4 @@
 import 'dart:ui';
-
-
-import 'package:fintek/src/features/auth/presentation/auth_checker.dart';
 import 'package:fintek/src/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fintek/firebase_options.dart';
